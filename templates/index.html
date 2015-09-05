@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta name="viewport" content = "width=device-width, initial-scale=1.0" charset="utf-8">
+ <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+ <script src="{{ url_for('static', filename='js/bootstrap.min.css') }}"></script>
+ <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+
+     <style>
+        h2{ margin-top:5%;
+        margin-bottom:-8%;
+        margin-left:10%;
+        font-size:1.5em;
+        }
+        table{
+        table-layout:fixed;
+        header:fixed;
+        }
+
+        .div-table-content {
+        height:450px;
+        overflow-y:auto;
+        }
+    </style>
+</head>
+
+<body class = "body">
+
+
+   <h2 style="margin-left:10%;">Raw Data</h2>
+ <div class="div-table-content" style="margin:10%;">
+  <table class="table table-bordered table-hover"style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody >
+      {% for a in x.T %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+    <h2 style="margin-left:10%;">Data Description</h2>
+<div style="margin:10%;">
+ <table class="table table-bordered table-hover"style="margin-top:12px;">
+    <thead>
+      <tr>
+          <td></td>
+          {% for h in header %}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <th>Sum</th>
+          {% for e in sum %}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+    <tr>
+          <th>Min</th>
+          {% for e in min %}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+    <tr>
+          <th>Max</th>
+          {% for e in max %}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+    <tr>
+          <th>Mean</th>
+          {% for e in mean1 %}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+    <tr>
+          <th>Standard Deviation</th>
+          {% for e in std1 %}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+     </tbody>
+  </table>
+</div>
+  <h2 style="margin-left:10%;">Normalized Data</h2>
+
+ <div class="div-table-content" style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in nm.T %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+ <h2 style="margin-left:10%;">Correlation Matrix on Normalized Data</h2>
+ <div style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for a in corr %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+    <h2 style="margin-left:10%;">PCA</h2>
+ <div style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in pca %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+   <h2 style="margin-left:10%;">Eigen Values</h2>
+ <div  style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in eigval %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+ <h2 style="margin-left:10%;">Eigen Vector</h2>
+ <div  style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for a in eigvec %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+ <h2 style="margin-left:10%;">Loading Factor</h2>
+ <div style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for a in loadingfactor %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<h2 style="margin-left:10%;">PCA Observation</h2>
+ <div class="div-table-content" style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header %}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in pcaobservation.T %}
+      <tr>
+          {% for e in a %}
+          <td>{{ e }} </td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<h2 style="margin-left:10%;">Communalities</h2>
+ <div style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in communalities %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+  <h2 >Verimax</h2>
+ <div style="margin:10%;">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for a in varimax %}
+      <tr>
+          {% for e in a%}
+          <td>{{ e }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<h2 >Regression On Raw Data</h2>
+ <div style="margin:10%">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in rw %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+<h2 >Regression On PCA Observation</h2>
+ <div  style="margin:10%">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in rp %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+<h2>Regression On PCA Peak</h2>
+ <div style="margin:10%">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in rpkpc %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+<h2>Regression On PCA Dip</h2>
+ <div style="margin:10%">
+  <table class="table table-bordered table-hover" style="margin-top:12px;">
+    <thead>
+      <tr>
+          {% for h in header%}
+          <th>{{ h }}</th>
+          {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      {% for a in rdppc %}
+      <td>{{ a }}</td>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+ <div class="" style="width:100%;">
+       <img src='static/images/pca1.png' alt="Image Placeholder" style="width:49%; float:left;">
+       <img src='static/images/pca2.png' alt="Image Placeholder" style="width:49%; float:left;">
+</div>
+
+ <div class="" style="width:100%;">
+       <img src='static/images/pca3.png' alt="Image Placeholder" style="width:49%; float:left;">
+       <img src='static/images/pca4.png' alt="Image Placeholder" style="width:49%; float:left;">
+ </div>
+  <div class="" style="width:100%;">
+       <img src='static/images/pca5.png' alt="Image Placeholder" style="width:49%; float:left;">
+       <img src='static/images/x1_peak_dip.png' alt="Image Placeholder" style="width:49%; float:left;">
+ </div>
+ <div class="" style="width:100%;">
+       <img src='static/images/x2_peak_dip.png' alt="Image Placeholder" style="width:49%; float:left;">
+       <img src='static/images/x3_peak_dip.png' alt="Image Placeholder" style="width:49%; float:left;">
+ </div>
+ <div class="" style="width:100%;">
+       <img src='static/images/x4_peak_dip.png' alt="Image Placeholder" style="width:49%; float:left;">
+       <img src='static/images/x5_peak_dip.png' alt="Image Placeholder" style="width:49%; float:left;">
+ </div>
+
+
+
+</body>
+
+</html>
