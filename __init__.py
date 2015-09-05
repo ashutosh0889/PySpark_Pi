@@ -369,4 +369,5 @@ def contactpage():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, host='127.0.0.1', port=8080, passthrough_errors=True)
+
